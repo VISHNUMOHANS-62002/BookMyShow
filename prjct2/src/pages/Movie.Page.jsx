@@ -7,11 +7,11 @@ import Slider from 'react-slick';
 import{FaCcVisa,FaCcApplePay} from 'react-icons/fa'
 import PosterSlider from '../components/PosterSlider/PosterSlider.Component';
 import MovieHero from '../components/MovieHero/MovieHero.Component';
-
+import Cast from '../components/Cast/Cast.Component';
 
 
 const MoviePage = (props) => {
-    const {posters,title,subtitle,isDark,config}=props;
+  const {posters,title,subtitle,isDark,config}=props;
   const { id } = useParams();
   const { movie, setMovie } = useContext(MovieContext);
   const [cast, setCast] = useState();
@@ -51,12 +51,64 @@ const MoviePage = (props) => {
     speed: 500,
     slidesToScroll: 1,
     slidesToShow: 1,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slideToShow: 3,
+          slideToScroll: 2,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          initialSlide: 1,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          initialSlide: 2,
+        },
+      },
+    ],
   };
-  const settings = {arrows: true,
+  const settings = {
+    arrows: true,
     infinite: true,
     speed: 500,
     slidesToScroll: 1,
-    slidesToShow: 1,};
+    slidesToShow: 1,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slideToShow: 3,
+          slideToScroll: 2,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          initialSlide: 1,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          initialSlide: 2,
+        },
+      },
+    ],
+  };
 
   return (
     <>
@@ -71,7 +123,6 @@ const MoviePage = (props) => {
         </div>
 
         <div className="my-8">
-          <hr />
           <h2 className="text-gray-800 font-bold text-2xl mb-3">
             Applicable Offers
           </h2>
@@ -105,10 +156,11 @@ const MoviePage = (props) => {
           </div>
         </div>
 
-        <div className="my-8">{/* Cast & Crew */}</div>
+        <div className="my-8"><Slider {...settingsCast}>
+          {cast.map((castData)=>{<Cast image={castData.profile_path} castName={movie.original_name} role={movie.character}/>})}
+          </Slider></div>
         <div className="my-8">
-          {" "}
-          <hr />
+          <hr/>
         </div>
         <div className="my-8">
           <PosterSlider
@@ -119,7 +171,7 @@ const MoviePage = (props) => {
           />
         </div>
         <div className="my-8">
-          <h />
+          <hr/>
         </div>
         <div className="my-8">
           <PosterSlider
