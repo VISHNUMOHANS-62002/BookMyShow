@@ -6,6 +6,8 @@ import { MovieContext } from '../components/Context/Movie.Context';
 import Slider from 'react-slick';
 import{FaCcVisa,FaCcApplePay} from 'react-icons/fa'
 import PosterSlider from '../components/PosterSlider/PosterSlider.Component';
+import MovieHero from '../components/MovieHero/MovieHero.Component';
+
 
 
 const MoviePage = (props) => {
@@ -58,6 +60,7 @@ const MoviePage = (props) => {
 
   return (
     <>
+    <MovieHero/>
       <div className="my-12 container px-4 lg:w-2/3">
         <div className="flex flex-col items-start gap-3">
           <h1 className="text-gray-800 font-bold text-2xl">About the Movie</h1>
