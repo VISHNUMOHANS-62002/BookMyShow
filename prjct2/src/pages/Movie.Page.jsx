@@ -157,7 +157,7 @@ const MoviePage = (props) => {
         </div>
 
         <div className="my-8"><Slider {...settingsCast}>
-          {cast.map((castData)=>{<Cast image={castData.profile_path} castName={movie.original_name} role={movie.character}/>})}
+          {cast.map((castData)=>{<Cast image={castData.profile_path} castName={castData.original_name} role={castData.character}/>})}
           </Slider></div>
         <div className="my-8">
           <hr/>

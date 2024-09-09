@@ -49,8 +49,8 @@ const HeroCarousel = () => {
     speed: 500,
     slidesToScroll: 1,
     slidesToShow: 1,
-    nextArrow: <NextArrow />,
-    prevArrow: <PreArrow />,
+    nextArrow: <NextArrow/>,
+    prevArrow: <PreArrow/>,
     cssEase: "linear",
   };
 
