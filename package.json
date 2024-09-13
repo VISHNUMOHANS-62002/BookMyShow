@@ -1,0 +1,14 @@
+{
+  "name": "prjct2",
+  "version": "1.0.0",
+  "description": "npm init npm i create-react-app npx create-react-app project2 cd project2 npm start npm install -D tailwindcss postcss autoprefixer npx tailwindcss init npm install react-slick  npm install slick-carousel npm i axios npm install @headlessui/react npm install react-icons npm i react-router-dom",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "create-react-app": "^5.0.1"
+  }
+}

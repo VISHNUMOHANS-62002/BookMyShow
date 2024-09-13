@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useContext } from 'react';
+import { useState } from 'react';
 import { MovieContext } from "../Context/Movie.Context";
 import PaymentModal from '../PaymentModal/Payment.Component';
 
