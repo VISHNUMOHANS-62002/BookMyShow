@@ -1,11 +1,32 @@
-import React from 'react'
-import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useState } from "react";
+import React from 'react';
+import { Dialog, Transition } from '@headlessui/react';
+import { Fragment } from 'react';
 
-const PaymentModal = ({setIsOpen,isOpen,price}) => {
-    const closeModal=()=>{
+const PaymentModal = ({ setIsOpen, isOpen, price }) => {
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+
+  const launchRazorPay = () => {
+    let options = {
+      key: 'rzp_test_06BnkaxXGUXQy8',
+      amount: price * 100, // Amount in the smallest currency unit
+      currency: 'INR',
+      name: 'Book My Show Clone',
+      description: 'Movie Purchase or Rent',
+      handler: function (response) {
         setIsOpen(false);
-    }
+        alert('Payment Successful');
+      },
+      theme: {
+        color: '#c4242d', // Fixed color format
+      },
+    };
+
+    let razorPay = new window.Razorpay(options); // Corrected initialization
+    razorPay.open();
+  };
+
   return (
     <>
       <Transition appear show={isOpen} as={Fragment}>
@@ -42,21 +63,21 @@ const PaymentModal = ({setIsOpen,isOpen,price}) => {
                   </Dialog.Title>
                   <div className="mt-2">
                     <p className="text-sm text-gray-500">
-                      Hello please make the payment with the following steps
+                      Hello, please make the payment with the following steps
                     </p>
                   </div>
 
                   <div className="mt-4">
                     <button
                       type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-red-500 px-4 py-2 text-sm font-medium text-red-900 hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
-                      onClick={closeModal}
+                      className="inline-flex justify-center rounded-md border border-transparent bg-red-500 px-4 py-2 text-sm font-medium text-white hover:bg-red-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
+                      onClick={launchRazorPay} // Use launchRazorPay function
                     >
                       Pay ${price}
                     </button>
                     <button
                       type="button"
-                      className="ml-2 inline-flex justify-center rounded-md border border-transparent bg-red-500 px-4 py-2 text-sm font-medium text-red-900 hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
+                      className="ml-2 inline-flex justify-center rounded-md border border-transparent bg-gray-500 px-4 py-2 text-sm font-medium text-white hover:bg-gray-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-500 focus-visible:ring-offset-2"
                       onClick={closeModal}
                     >
                       Cancel Payment
@@ -70,6 +91,6 @@ const PaymentModal = ({setIsOpen,isOpen,price}) => {
       </Transition>
     </>
   );
-}
+};
 
-export default PaymentModal
+export default PaymentModal;

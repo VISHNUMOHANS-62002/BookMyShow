@@ -1,63 +1,60 @@
-import React, { useEffect, useState,useContext } from 'react'
-import {useParams} from 'react-router-dom'
-import MovieLayoutHoc from '../layouts/Movie.layout'
+import React, { useEffect, useState, useContext } from 'react';
+import { useParams } from 'react-router-dom';
+import MovieLayoutHoc from '../layouts/Movie.layout';
 import axios from 'axios';
 import { MovieContext } from '../components/Context/Movie.Context';
 import Slider from 'react-slick';
-import{FaCcVisa,FaCcApplePay} from 'react-icons/fa'
+import { FaCcVisa, FaCcApplePay } from 'react-icons/fa';
 import PosterSlider from '../components/PosterSlider/PosterSlider.Component';
 import MovieHero from '../components/MovieHero/MovieHero.Component';
 import Cast from '../components/Cast/Cast.Component';
 
-
 const MoviePage = (props) => {
-  const {posters,title,subtitle,isDark,config}=props;
+  const { posters, title, subtitle, isDark, config } = props;
+  
   const { id } = useParams();
   const { movie, setMovie } = useContext(MovieContext);
   
   const [cast, setCast] = useState([]);
   const [similarMovies, setSimilarMovies] = useState([]);
-  const [recommendedMovies, setRecommendedrMovies] = useState([]);
+  const [recommendedMovies, setRecommendedMovies] = useState([]);
+
   useEffect(() => {
     const requestCast = async () => {
-      const getCast = await axios.get(
-        `/movie/${id}/credits`
-      );
+      const getCast = await axios.get(`/movie/${id}/credits`);
       setCast(getCast.data.cast);
     };
     requestCast();
   }, [id]);
+
   useEffect(() => {
     const requestSimilarMovies = async () => {
-      const getSimilarMovies = await axios.get(
-        `/movie/${id}/similar`
-      );
+      const getSimilarMovies = await axios.get(`/movie/${id}/similar`);
       setSimilarMovies(getSimilarMovies.data.results);
     };
     requestSimilarMovies();
   }, [id]);
+
   useEffect(() => {
-    const requestRecommendedrMovies = async () => {
-      const getRecommendedrMovies = await axios.get(
-        `/movie/${id}/recommendations`
-      );
-      setRecommendedrMovies(getRecommendedrMovies.data.results);
+    const requestRecommendedMovies = async () => {
+      const getRecommendedMovies = await axios.get(`/movie/${id}/recommendations`);
+      setRecommendedMovies(getRecommendedMovies.data.results);
     };
-    requestRecommendedrMovies();
+    requestRecommendedMovies();
   }, [id]);
 
   const settingsCast = {
     arrows: true,
     infinite: true,
     speed: 500,
-    slidesToScroll: 1,
-    slidesToShow: 1,
+    slidesToScroll: 5,
+    slidesToShow: 5,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
-          slideToShow: 3,
-          slideToScroll: 2,
+          slidesToShow: 5,
+          slidesToScroll: 5,
         },
       },
       {
@@ -78,18 +75,19 @@ const MoviePage = (props) => {
       },
     ],
   };
+
   const settings = {
     arrows: true,
     infinite: true,
     speed: 500,
-    slidesToScroll: 1,
-    slidesToShow: 1,
+    slidesToScroll: 5,
+    slidesToShow: 5,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
-          slideToShow: 3,
-          slideToScroll: 2,
+          slidesToShow: 4,
+          slidesToScroll: 4,
         },
       },
       {
@@ -113,8 +111,8 @@ const MoviePage = (props) => {
 
   return (
     <>
-    <MovieHero/>
-      <div className="my-12 container px-4 lg:w-2/3">
+      <MovieHero />
+      <div className="my-12 container px-4 lg:w-full">
         <div className="flex flex-col items-start gap-3">
           <h1 className="text-gray-800 font-bold text-2xl">About the Movie</h1>
           <p>{movie.overview}</p>
@@ -137,8 +135,7 @@ const MoviePage = (props) => {
                   Visa Stream Offers
                 </h3>
                 <p className="text-gray-600">
-                  Get 50% off up to INR 150 on all Rupay Card* on BookMyShow
-                  Stream
+                  Get 50% off up to INR 150 on all Rupay Card* on BookMyShow Stream
                 </p>
               </div>
             </div>
@@ -149,31 +146,45 @@ const MoviePage = (props) => {
               <div className="flex flex-col items-start">
                 <h3 className="text-gray-700 font-bold text-xl">Film Pass</h3>
                 <p className="text-gray-600">
-                  Get 50% off up to INR 150 on all Rupay Card* on BookMyShow
-                  Stream
+                  Get 50% off up to INR 150 on all Rupay Card* on BookMyShow Stream
                 </p>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="my-8"><Slider {...settingsCast}>
-          {cast.map((castData)=>{<Cast image={castData.profile_path} castName={castData.original_name} role={castData.character}/>})}
-          </Slider></div>
         <div className="my-8">
-          <hr/>
+          <h1 className='font-bold text-2xl'>Cast & Crew</h1>
+          <Slider {...settingsCast}>
+            {cast.map((castData) => (
+              <Cast
+                
+                key={castData.id}
+                image={castData.profile_path}
+                castName={castData.original_name}
+                role={castData.character}
+              />
+            ))}
+          </Slider>
         </div>
+
+        <div className="my-8">
+          <hr />
+        </div>
+
         <div className="my-8">
           <PosterSlider
             config={settings}
-            title="RecommendedMovies"
+            title="Recommended Movies"
             posters={recommendedMovies}
             isDark={false}
           />
         </div>
+
         <div className="my-8">
-          <hr/>
+          <hr />
         </div>
+
         <div className="my-8">
           <PosterSlider
             config={settings}
@@ -182,6 +193,7 @@ const MoviePage = (props) => {
             isDark={false}
           />
         </div>
+
         <div className="my-8">
           <hr />
         </div>

@@ -19,8 +19,8 @@ const MovieHero = () => {
             </div>
         </div>
         <div className='flex items-center gap-3 md:px-4 md:w-screen text-xl px-4'>
-            <button className='bg-red-500 w-1/4 py-3 text-white font-semibold rounded-lg'>Rent ₹ 149</button>
-            <button className='bg-red-600 w-1/4 py-3 text-white font-semibold rounded-lg'>Buy ₹ 599</button>
+            <button className='bg-red-500 w-1/5  py-3 text-white font-semibold rounded-lg'>Rent ₹ 149</button>
+            <button className='bg-red-600 w-1/5 py-3 text-white font-semibold rounded-lg'>Buy ₹ 599</button>
         </div>
     </div>
     <div className='relative hidden w-full lg:block' style={{height:"30rem"}}>
